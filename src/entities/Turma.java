@@ -6,13 +6,15 @@ public class Turma {
     private String sala;
     private String horario;
     private Professor professor;
+    private Disciplina disciplina;
 
-    public Turma(int codigo, int qtdVagas, String sala, String horario, Professor professor) {
+    public Turma(int codigo, int qtdVagas, String sala, String horario, Professor professor, Disciplina disciplina) {
         this.codigo = codigo;
         this.qtdVagas = qtdVagas;
         this.sala = sala;
         this.horario = horario;
         this.professor = professor;
+        this.disciplina = disciplina;
     }
 
     public int getCodigo() {
@@ -53,6 +55,14 @@ public class Turma {
 
     public void setProfessor(Professor professor) {
         this.professor = professor;
+    }
+
+    public Disciplina getDisciplina() {
+        return disciplina;
+    }
+
+    public void setDisciplina(Disciplina disciplina) {
+        this.disciplina = disciplina;
     }
 
 }

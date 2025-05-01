@@ -6,19 +6,18 @@ import java.util.Date;
 
 public class Professor extends Pessoa {
 
-    private Turma turma;
+    private double salario;
 
-    public Professor(String nome, int matricula, Date nascimento, Sexo sexo, String telefone, Turma turma) {
-        super(nome, matricula, nascimento, sexo, telefone);
-        this.turma = turma;
+    public Professor(String nome, int matricula, Date nascimento, Sexo sexo, String email, double salario) {
+        super(nome, matricula, nascimento, sexo, email);
+        this.salario = salario;
     }
 
-    public Turma getTurma() {
-        return turma;
+    public double getSalario() {
+        return salario;
     }
 
-    public void setTurma(Turma turma) {
-        this.turma = turma;
+    public void setSalario(double salario) {
+        this.salario = salario;
     }
-
 }

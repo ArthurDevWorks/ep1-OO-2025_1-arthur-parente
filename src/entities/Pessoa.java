@@ -6,18 +6,17 @@ import java.util.Date;
 
 public class Pessoa {
     private String nome;
-
     private int matricula;
     private Date nascimento;
     private Sexo sexo;
-    private String telefone;
+    private String email;
 
-    public Pessoa(String nome, int matricula, Date nascimento, Sexo sexo, String telefone) {
+    public Pessoa(String nome, int matricula, Date nascimento, Sexo sexo, String email) {
         this.nome = nome;
         this.matricula = matricula;
         this.nascimento = nascimento;
         this.sexo = sexo;
-        this.telefone = telefone;
+        this.email = email;
     }
 
     public String getNome() {
@@ -52,12 +51,12 @@ public class Pessoa {
         this.sexo = sexo;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getEmail() {
+        return email;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 }

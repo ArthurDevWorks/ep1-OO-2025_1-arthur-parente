@@ -5,36 +5,13 @@ import enums.Sexo;
 import java.util.Date;
 
 public class Aluno extends Pessoa {
-    private Turma turma;
-    private double nota;
-    private double presenca;
     private String curso;
     private  boolean especial;
 
-
-
-    public Turma getTurma() {
-        return turma;
-    }
-
-    public void setTurma(Turma turma) {
-        this.turma = turma;
-    }
-
-    public double getNota() {
-        return nota;
-    }
-
-    public void setNota(double nota) {
-        this.nota = nota;
-    }
-
-    public double getPresenca() {
-        return presenca;
-    }
-
-    public void setPresenca(double presenca) {
-        this.presenca = presenca;
+    public Aluno(String nome, int matricula, Date nascimento, Sexo sexo, String email, String curso, boolean especial) {
+        super(nome, matricula, nascimento, sexo, email);
+        this.curso = curso;
+        this.especial = especial;
     }
 
     public String getCurso() {
