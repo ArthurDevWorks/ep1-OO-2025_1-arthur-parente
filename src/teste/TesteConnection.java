@@ -1,7 +1,7 @@
 package teste;
 
 import java.sql.SQLException;
-import model.GerenteConexao;
+import models.GerenteConexao;
 
 public class TesteConnection {
     public static void main(String[] args)throws ClassNotFoundException, SQLException {
