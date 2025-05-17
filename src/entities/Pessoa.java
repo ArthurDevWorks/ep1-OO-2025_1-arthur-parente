@@ -4,19 +4,19 @@ import enums.Sexo;
 
 import java.util.Date;
 
-public class Pessoa {
+public abstract class Pessoa {
     private String nome;
-    private int matricula;
     private Date nascimento;
     private Sexo sexo;
     private String email;
+    private int matricula;
 
-    public Pessoa(String nome, int matricula, Date nascimento, Sexo sexo, String email) {
+    public Pessoa(String nome, Date nascimento, Sexo sexo, String email, int matricula) {
         this.nome = nome;
-        this.matricula = matricula;
         this.nascimento = nascimento;
         this.sexo = sexo;
         this.email = email;
+        this.matricula = matricula;
     }
 
     public String getNome() {

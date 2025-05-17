@@ -8,8 +8,8 @@ public class Aluno extends Pessoa {
     private String curso;
     private  boolean especial;
 
-    public Aluno(String nome, int matricula, Date nascimento, Sexo sexo, String email, String curso, boolean especial) {
-        super(nome, matricula, nascimento, sexo, email);
+    public Aluno(String nome, Date nascimento, Sexo sexo,  String email, int matricula, String curso, boolean especial) {
+        super(nome, nascimento, sexo, email,matricula);
         this.curso = curso;
         this.especial = especial;
     }
