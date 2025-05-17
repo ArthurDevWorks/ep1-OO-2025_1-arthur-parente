@@ -83,6 +83,7 @@ public class AlunoDAO {
         FileManager.saveToFile(FILE_NAME, lines);
     }
 
+   //adiciona o registro na linha do aluno
     private static String alunoToLine(Aluno aluno) {
         return String.format("%s|%s|%s|%s|%d|%s|%b",
                 aluno.getNome(),
@@ -94,6 +95,7 @@ public class AlunoDAO {
                 aluno.isEspecial());
     }
 
+    //Busca a linha do aluno
     private static Aluno lineToAluno(String line) {
         try {
             String[] parts = line.split("\\|");
