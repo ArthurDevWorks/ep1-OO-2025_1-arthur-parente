@@ -95,10 +95,6 @@ public class TurmaDAO {
         Professor professor = ProfessorDAO.findByMatricula(Integer.parseInt(parts[1]));
         Disciplina disciplina = DisciplinaDAO.findByCodigo(parts[2]);
 
-        if (professor == null || disciplina == null) {
-            throw new IOException("Dados inconsistentes na turma");
-        }
-
         return new Turma(
                 Integer.parseInt(parts[0]), // codigo
                 Integer.parseInt(parts[4]), // qtdVagas

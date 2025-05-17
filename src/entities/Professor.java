@@ -13,6 +13,10 @@ public class Professor extends Pessoa {
         this.salario = salario;
     }
 
+    public Professor(String nome){
+        super(nome);
+    }
+
     public double getSalario() {
         return salario;
     }

@@ -40,6 +40,7 @@ public class MatriculaDAO {
 
     public static Matriculado find(int matriculaAluno, int codigoTurma) throws IOException {
         List<Matriculado> matriculados = findAll();
+        System.out.println(matriculados);
         for (Matriculado m : matriculados) {
             if (m.getAluno().getMatricula() == matriculaAluno &&
                     m.getTurma().getCodigo() == codigoTurma) {
@@ -125,19 +126,20 @@ public class MatriculaDAO {
     private static Matriculado lineToMatriculado(String line) throws IOException, ParseException {
         String[] parts = line.split("\\|");
 
-        // Busca o aluno e a turma nos respectivos DAOs
+        if (parts.length != 4) {
+            throw new IOException("Formato de linha inválido: " + line);
+        }
+
         Aluno aluno = AlunoDAO.findByMatricula(Integer.parseInt(parts[0]));
         Turma turma = TurmaDAO.findByCodigo(Integer.parseInt(parts[1]));
 
         if (aluno == null || turma == null) {
-            throw new IOException("Dados inconsistentes na matrícula");
+            throw new IOException("Dados inconsistentes na matrícula: " + line);
         }
 
-        return new Matriculado(
-                aluno,
-                turma,
-                Double.parseDouble(parts[2]), // nota
-                Double.parseDouble(parts[3])  // presenca
-        );
+        double nota = Double.parseDouble(parts[2].replace(",", "."));
+        double presenca = Double.parseDouble(parts[3].replace(",", "."));
+
+        return new Matriculado(aluno, turma, nota, presenca);
     }
 }

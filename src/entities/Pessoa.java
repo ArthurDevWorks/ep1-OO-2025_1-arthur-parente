@@ -19,6 +19,9 @@ public abstract class Pessoa {
         this.matricula = matricula;
     }
 
+    public Pessoa(String nome) {
+    }
+
     public String getNome() {
         return nome;
     }

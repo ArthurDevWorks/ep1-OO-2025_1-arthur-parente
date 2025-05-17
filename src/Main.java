@@ -312,6 +312,8 @@ public class Main {
                 return;
             }
 
+            List<Turma> turmas = TurmaDAO.findAll();
+
             System.out.print("Matrícula do aluno: ");
             int matriculaAluno = sc.nextInt();
             sc.nextLine();
@@ -444,91 +446,85 @@ public class Main {
 
     private static void cadastrarTurma() {
         try {
-            // 1. Verifica se existem professores cadastrados
-            List<Professor> professores = ProfessorDAO.findAll();
-            if (professores.isEmpty()) {
-                System.out.println("\nNão existem professores cadastrados no sistema!");
-                System.out.println("Por favor, cadastre pelo menos um professor antes de criar turmas.");
-                return;
-            }
-
-            // 2. Verifica se existem disciplinas cadastradas
+            // Verificar se há disciplinas cadastradas
             List<Disciplina> disciplinas = DisciplinaDAO.findAll();
             if (disciplinas.isEmpty()) {
-                System.out.println("\nNão existem disciplinas cadastradas no sistema!");
-                System.out.println("Por favor, cadastre pelo menos uma disciplina antes de criar turmas.");
+                System.out.println("Nenhuma disciplina cadastrada. Cadastre uma disciplina antes.");
                 return;
             }
 
-            System.out.print("\nCódigo da turma: ");
-            int codigo = sc.nextInt();
-            sc.nextLine();
-
-            // Verifica se turma já existe
-            if (TurmaDAO.findByCodigo(codigo) != null) {
-                System.out.println("Já existe uma turma com este código!");
-                return;
+            System.out.println("Selecione a disciplina para a nova turma:");
+            for (int i = 0; i < disciplinas.size(); i++) {
+                System.out.println((i + 1) + ". " + disciplinas.get(i).getNome());
             }
+
+            int escolhaDisciplina;
+            do {
+                System.out.print("Número da disciplina: ");
+                escolhaDisciplina = sc.nextInt();
+                sc.nextLine();
+            } while (escolhaDisciplina < 1 || escolhaDisciplina > disciplinas.size());
+
+            Disciplina disciplinaSelecionada = disciplinas.get(escolhaDisciplina - 1);
+
+            // Dados da turma
+            System.out.print("Código da turma (inteiro): ");
+            int codigoTurma = sc.nextInt();
 
             System.out.print("Quantidade de vagas: ");
-            int vagas = sc.nextInt();
-            while (!Validador.vagasValidas(vagas)) {
-                System.out.println("Número de vagas deve ser positivo!");
-                System.out.print("Quantidade de vagas: ");
-                vagas = sc.nextInt();
-            }
-            sc.nextLine();
+            int qtdVagas = sc.nextInt();
+            sc.nextLine(); // limpar buffer
 
-            System.out.print("Sala (ou 'ONLINE' para turmas remotas): ");
+            System.out.print("Sala da turma: ");
             String sala = sc.nextLine();
 
-            System.out.print("Horário (ex: Segunda 14:00-16:00): ");
+            System.out.print("Horário da turma (ex: Seg 10h-12h): ");
             String horario = sc.nextLine();
 
-            // Lista professores disponíveis
-            System.out.println("\nProfessores disponíveis:");
-            for (int i = 0; i < professores.size(); i++) {
-                System.out.printf("%d - %s (Matrícula: %d)%n",
-                        i+1, professores.get(i).getNome(), professores.get(i).getMatricula());
-            }
+            // Cadastro do professor
+            System.out.println("=== Cadastro do professor da turma ===");
 
-            System.out.print("Escolha o professor (número): ");
-            int escolhaProfessor = sc.nextInt()-1;
-            sc.nextLine();
+            System.out.print("Nome do professor: ");
+            String nome = sc.nextLine();
 
-            if (escolhaProfessor < 0 || escolhaProfessor >= professores.size()) {
-                System.out.println("Opção inválida!");
+            System.out.print("Data de nascimento (dd/MM/yyyy): ");
+            String dataStr = sc.nextLine();
+            Date nascimento;
+            try {
+                nascimento = new SimpleDateFormat("dd/MM/yyyy").parse(dataStr);
+            } catch (ParseException e) {
+                System.out.println("Data inválida. Operação cancelada.");
                 return;
             }
-            Professor professor = professores.get(escolhaProfessor);
 
-            // Lista disciplinas disponíveis
-            System.out.println("\nDisciplinas disponíveis:");
-            for (int i = 0; i < disciplinas.size(); i++) {
-                System.out.printf("%d - %s (%s)%n",
-                        i+1, disciplinas.get(i).getNome(), disciplinas.get(i).getCodigo());
-            }
+            System.out.print("Sexo (M/F): ");
+            String sexoStr = sc.nextLine().toUpperCase();
+            Sexo sexo = sexoStr.equals("M") ? Sexo.MASCULINO : Sexo.FEMININO;
 
-            System.out.print("Escolha a disciplina (número): ");
-            int escolhaDisciplina = sc.nextInt()-1;
-            sc.nextLine();
+            System.out.print("Email: ");
+            String email = sc.nextLine();
 
-            if (escolhaDisciplina < 0 || escolhaDisciplina >= disciplinas.size()) {
-                System.out.println("Opção inválida!");
-                return;
-            }
-            Disciplina disciplina = disciplinas.get(escolhaDisciplina);
+            System.out.print("Matrícula do professor: ");
+            int matricula = sc.nextInt();
 
-            // Cria e salva a turma
-            Turma turma = new Turma(codigo, vagas, sala, horario, professor, disciplina);
+            System.out.print("Salário do professor: ");
+            double salario = sc.nextDouble();
+            sc.nextLine(); // limpar buffer
+
+            // Criar e salvar o professor
+            Professor professor = new Professor(nome, nascimento, sexo, email, matricula, salario);
+            ProfessorDAO.save(professor);
+
+            System.out.println("Professor cadastrado com sucesso!");
+
+            // Criar e salvar a turma
+            Turma turma = new Turma(codigoTurma, qtdVagas, sala, horario, professor, disciplinaSelecionada);
             TurmaDAO.save(turma);
-            System.out.println("\nTurma cadastrada com sucesso!");
 
-        } catch (IOException | ParseException e) {
+            System.out.println("Turma cadastrada com sucesso!");
+
+        } catch (Exception e) {
             System.out.println("Erro ao cadastrar turma: " + e.getMessage());
-        } catch (InputMismatchException e) {
-            System.out.println("Valor inválido! Digite um número.");
-            sc.nextLine(); // Limpa o buffer
         }
     }
 
