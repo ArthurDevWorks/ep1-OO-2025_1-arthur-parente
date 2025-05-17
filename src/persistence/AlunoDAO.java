@@ -22,12 +22,17 @@ public class AlunoDAO {
     }
 
     //Lista os alunos
-    public static List<Aluno> findAll() throws IOException, ParseException {
+    public static List<Aluno> findAll() throws IOException {
         List<String> lines = FileManager.readFromFile(FILE_NAME);
         List<Aluno> alunos = new ArrayList<>();
 
         for (String line : lines) {
-            alunos.add(lineToAluno(line));
+            Aluno aluno = lineToAluno(line);
+            if (aluno != null) {
+                alunos.add(aluno);
+            } else {
+                System.err.println("Ignorando linha inválida: " + line);
+            }
         }
 
         return alunos;
@@ -44,7 +49,7 @@ public class AlunoDAO {
                    return lineToAluno(line);
                }
            }
-       } catch (IOException | ParseException | NumberFormatException | ArrayIndexOutOfBoundsException e) {
+       } catch (IOException | NumberFormatException | ArrayIndexOutOfBoundsException e) {
            System.err.println("Erro ao buscar aluno: " + e.getMessage());
        }
        return null;
@@ -79,28 +84,44 @@ public class AlunoDAO {
     }
 
     private static String alunoToLine(Aluno aluno) {
-        return String.format("%d|%s|%s|%s|%s|%s|%b",
-                aluno.getMatricula(),
+        return String.format("%s|%s|%s|%s|%d|%s|%b",
                 aluno.getNome(),
                 dateFormat.format(aluno.getNascimento()),
                 aluno.getSexo(),
                 aluno.getEmail(),
+                aluno.getMatricula(),
                 aluno.getCurso(),
                 aluno.isEspecial());
     }
 
-    private static Aluno lineToAluno(String line) throws ParseException {
-        String[] parts = line.split("\\|");
-        Date nascimento = dateFormat.parse(parts[1]);
+    private static Aluno lineToAluno(String line) {
+        try {
+            String[] parts = line.split("\\|");
+            if (parts.length < 7) {
+                System.err.println("Linha incompleta no arquivo: " + line);
+                return null;
+            }
 
-        return new Aluno(
-                parts[0],               // nome
-                nascimento,             // nascimento
-                Sexo.valueOf(parts[2]), // sexo
-                parts[3],               // email
-                Integer.parseInt(parts[4]), // matricula
-                parts[5],               // curso
-                Boolean.parseBoolean(parts[6]) // especial
-        );
+            Date nascimento;
+            try {
+                nascimento = dateFormat.parse(parts[1]);
+            } catch (ParseException e) {
+                System.err.println("Data inválida no arquivo: " + parts[1]);
+                return null;
+            }
+
+            return new Aluno(
+                    parts[0],               // nome
+                    nascimento,             // nascimento
+                    Sexo.valueOf(parts[2]), // sexo
+                    parts[3],               // email
+                    Integer.parseInt(parts[4]), // matricula
+                    parts[5],               // curso
+                    Boolean.parseBoolean(parts[6]) // especial
+            );
+        } catch (Exception e) {
+            System.err.println("Erro ao processar linha do aluno: " + line);
+            return null;
+        }
     }
 }
