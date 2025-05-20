@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileManager {
-    public static void saveToFile(String filename, List<String> data) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+    public static void saveToFile(String filename, List<String> data, boolean append) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename, append))) {
             for (String line : data) {
                 writer.write(line);
                 writer.newLine();

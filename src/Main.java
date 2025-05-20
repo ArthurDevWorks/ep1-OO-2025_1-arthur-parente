@@ -177,7 +177,6 @@ public class Main {
 
     // =================== FUNÇÕES PARA ARMAZENAR DADOS =========================
 
-    //Cadastro de alunos
     private static void cadastrarAluno() {
         try {
             System.out.print("Nome: ");
@@ -281,6 +280,7 @@ public class Main {
     private static void listarAlunos() {
         try {
             List<Aluno> alunos = AlunoDAO.findAll();
+            System.out.println(alunos);
             if (alunos.isEmpty()) {
                 System.out.println("Nenhum aluno cadastrado.");
                 return;
@@ -497,9 +497,18 @@ public class Main {
                 return;
             }
 
-            System.out.print("Sexo (M/F): ");
-            String sexoStr = sc.nextLine().toUpperCase();
-            Sexo sexo = sexoStr.equals("M") ? Sexo.MASCULINO : Sexo.FEMININO;
+            Sexo sexoProf = null;
+            boolean sexoValido = false;
+            while (!sexoValido) {
+                System.out.print("Sexo (MASCULINO/FEMININO/OUTRO): ");
+                String sexoStr = sc.nextLine().toUpperCase();
+                try {
+                    sexoProf = Sexo.valueOf(sexoStr);
+                    sexoValido = true;
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Opção inválida! Digite MASCULINO, FEMININO ou OUTRO");
+                }
+            }
 
             System.out.print("Email: ");
             String email = sc.nextLine();
@@ -507,12 +516,21 @@ public class Main {
             System.out.print("Matrícula do professor: ");
             int matricula = sc.nextInt();
 
-            System.out.print("Salário do professor: ");
-            double salario = sc.nextDouble();
             sc.nextLine(); // limpar buffer
 
+            System.out.print("Data de Contratacao (dd/MM/yyyy): ");
+            String dataContraStr = sc.nextLine();
+            Date contratacao;
+
+            try {
+                contratacao = new SimpleDateFormat("dd/MM/yyyy").parse(dataContraStr);
+            } catch (ParseException e) {
+                System.out.println("Data inválida. Operação cancelada.");
+                return;
+            }
+
             // Criar e salvar o professor
-            Professor professor = new Professor(nome, nascimento, sexo, email, matricula, salario);
+            Professor professor = new Professor(nome, nascimento, sexoProf, email, matricula, contratacao);
             ProfessorDAO.save(professor);
 
             System.out.println("Professor cadastrado com sucesso!");

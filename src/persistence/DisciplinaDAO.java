@@ -13,7 +13,7 @@ public class DisciplinaDAO {
     public static void save(Disciplina disciplina) throws IOException {
         List<String> data = new ArrayList<>();
         data.add(disciplinaToLine(disciplina));
-        FileManager.saveToFile(FILE_NAME, data);
+        FileManager.saveToFile(FILE_NAME, data,true);
     }
 
     public static List<Disciplina> findAll() throws IOException {
@@ -61,7 +61,7 @@ public class DisciplinaDAO {
         for (Disciplina disciplina : disciplinas) {
             lines.add(disciplinaToLine(disciplina));
         }
-        FileManager.saveToFile(FILE_NAME, lines);
+        FileManager.saveToFile(FILE_NAME, lines,false);
     }
 
     private static String disciplinaToLine(Disciplina disciplina) {

@@ -17,7 +17,7 @@ public class MatriculaDAO {
     public static void save(Matriculado matriculado) throws IOException {
         List<String> data = new ArrayList<>();
         data.add(matriculadoToLine(matriculado));
-        FileManager.saveToFile(FILE_NAME, data);
+        FileManager.saveToFile(FILE_NAME, data,true);
     }
 
     public static List<Matriculado> findAll() throws IOException {
@@ -112,7 +112,7 @@ public class MatriculaDAO {
         for (Matriculado m : matriculados) {
             lines.add(matriculadoToLine(m));
         }
-        FileManager.saveToFile(FILE_NAME, lines);
+        FileManager.saveToFile(FILE_NAME, lines, false);
     }
 
     private static String matriculadoToLine(Matriculado matriculado) {

@@ -1,5 +1,6 @@
 package persistence;
 
+import entities.Aluno;
 import entities.Professor;
 import enums.Sexo;
 import persistence.FileManager;
@@ -17,7 +18,7 @@ public class ProfessorDAO {
     public static void save(Professor professor) throws IOException {
         List<String> data = new ArrayList<>();
         data.add(professorToLine(professor));
-        FileManager.saveToFile(FILE_NAME, data);
+        FileManager.saveToFile(FILE_NAME, data, true);
     }
 
     public static List<Professor> findAll() throws IOException, ParseException {
@@ -65,22 +66,23 @@ public class ProfessorDAO {
         for (Professor professor : professores) {
             lines.add(professorToLine(professor));
         }
-        FileManager.saveToFile(FILE_NAME, lines);
+        FileManager.saveToFile(FILE_NAME, lines, false);
     }
 
     private static String professorToLine(Professor professor) {
-        return String.format("%d|%s|%s|%s|%s|%.2f",
+        return String.format("%d|%s|%s|%s|%s|%s",
                 professor.getMatricula(),
                 professor.getNome(),
                 dateFormat.format(professor.getNascimento()),
                 professor.getSexo(),
                 professor.getEmail(),
-                professor.getSalario());
+                professor.getContratacao());
     }
 
     private static Professor lineToProfessor(String line) throws ParseException {
         String[] parts = line.split("\\|");
         Date nascimento = dateFormat.parse(parts[2]);
+        Date contratacao = dateFormat.parse(parts[2]);
 
         return new Professor(
                 parts[1],               // nome
@@ -88,7 +90,7 @@ public class ProfessorDAO {
                 Sexo.valueOf(parts[3]), // sexo
                 parts[4],               // email
                 Integer.parseInt(parts[0]), // matricula
-                Double.parseDouble(parts[5]) // salario
+                contratacao // contratacao
         );
     }
 }

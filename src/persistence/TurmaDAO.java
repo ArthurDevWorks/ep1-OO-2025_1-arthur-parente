@@ -15,7 +15,7 @@ public class TurmaDAO {
     public static void save(Turma turma) throws IOException {
         List<String> data = new ArrayList<>();
         data.add(turmaToLine(turma));
-        FileManager.saveToFile(FILE_NAME, data);
+        FileManager.saveToFile(FILE_NAME, data,true);
     }
 
     public static List<Turma> findAll() throws IOException, ParseException {
@@ -75,7 +75,7 @@ public class TurmaDAO {
         for (Turma turma : turmas) {
             lines.add(turmaToLine(turma));
         }
-        FileManager.saveToFile(FILE_NAME, lines);
+        FileManager.saveToFile(FILE_NAME, lines,false);
     }
 
     private static String turmaToLine(Turma turma) {

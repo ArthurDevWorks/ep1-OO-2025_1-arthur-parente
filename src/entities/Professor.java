@@ -6,22 +6,22 @@ import java.util.Date;
 
 public class Professor extends Pessoa {
 
-    private double salario;
+    private Date contratacao;
 
-    public Professor(String nome, Date nascimento, Sexo sexo, String email, int matricula, double salario) {
+    public Professor(String nome, Date nascimento, Sexo sexo, String email, int matricula, Date contratacao) {
         super(nome, nascimento, sexo, email, matricula);
-        this.salario = salario;
+        this.contratacao = contratacao;
     }
 
     public Professor(String nome){
         super(nome);
     }
 
-    public double getSalario() {
-        return salario;
+    public Date getContratacao() {
+        return contratacao;
     }
 
-    public void setSalario(double salario) {
-        this.salario = salario;
+    public void setContratacao(Date contratacao) {
+        this.contratacao = contratacao;
     }
 }

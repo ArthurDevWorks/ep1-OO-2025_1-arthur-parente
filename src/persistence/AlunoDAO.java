@@ -18,7 +18,7 @@ public class AlunoDAO {
     public static void save(Aluno aluno) throws IOException {
         List<String> data = new ArrayList<>();
         data.add(alunoToLine(aluno));
-        FileManager.saveToFile(FILE_NAME, data);
+        FileManager.saveToFile(FILE_NAME, data, true); // append = true
     }
 
     //Lista os alunos
@@ -80,7 +80,7 @@ public class AlunoDAO {
         for (Aluno aluno : alunos) {
             lines.add(alunoToLine(aluno));
         }
-        FileManager.saveToFile(FILE_NAME, lines);
+        FileManager.saveToFile(FILE_NAME, lines,false);
     }
 
    //adiciona o registro na linha do aluno
