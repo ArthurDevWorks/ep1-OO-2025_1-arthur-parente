@@ -25,34 +25,6 @@ O enunciado do trabalho pode ser encontrado aqui:
    [Executar classe Main.java na raiz]
 
 3. **Estrutura de Pastas:**  
-   [ep-00/
-   ├── src/
-   │   ├── entities/
-   │   │   ├── Aluno.java
-   │   │   ├── Disciplina.java
-   │   │   ├── Matriculado.java
-   │   │   ├── Professor.java
-   │   │   └── Turma.java
-   │   ├── enums/
-   │   │   ├── Modalidade.java
-   │   │   └── Sexo.java
-   │   ├── persistence/
-   │   │   ├── AlunoDAO.java
-   │   │   ├── DisciplinaDAO.java
-   │   │   ├── MatriculaDAO.java
-   │   │   ├── ProfessorDAO.java
-   │   │   └── TurmaDAO.java
-   │   ├── utils/
-   │   │   ├── FileManager.java
-   │   │   └── Validador.java
-   │   └── Main.java
-   ├── bin/
-   └── arquivos/
-   ├── alunos.txt
-   ├── disciplinas.txt
-   ├── matriculas.txt
-   ├── professores.txt
-   └── turmas.txt]
 
 3. **Versão do JAVA utilizada:**  
    [Java 21]
