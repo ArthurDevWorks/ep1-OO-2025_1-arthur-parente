@@ -19,7 +19,7 @@ O enunciado do trabalho pode ser encontrado aqui:
 ## Instruções para Compilação e Execução
 
 1. **Compilação:**  
-   [Descrever aqui como compilar o projeto. Exemplo: `javac Main.java` ou o script usado]
+   [Clonar repositorio na ide de preferencia e executar a classe Main, no desenvolvimento foi utilizado o InteliJ]
 
 2. **Execução:**  
    [Executar classe Main.java na raiz]
@@ -40,13 +40,13 @@ O enunciado do trabalho pode ser encontrado aqui:
 ## Prints da Execução
 
 1. Menu Principal:  
-   ![Inserir Print 1](caminho/do/print1.png)
+   ![Inserir Print 1](images/first-image.png)
 
 2. Cadastro de Aluno:  
-   ![Inserir Print 2](caminho/do/print2.png)
+   ![Inserir Print 2](images/second-image.png)
 
 3. Relatório de Frequência/Notas:  
-   ![Inserir Print 3](caminho/do/print3.png)
+   ![Inserir Print 3](images/third-image.png)
 
 ---
 
@@ -60,13 +60,13 @@ O enunciado do trabalho pode ser encontrado aqui:
 - [x] Relatórios de desempenho acadêmico por aluno, turma e disciplina
 - [x] Persistência de dados em arquivos (.txt ou .csv)
 - [x] Tratamento de duplicidade de matrículas
-- [] Uso de herança, polimorfismo e encapsulamento
+- [x] Uso de herança, polimorfismo e encapsulamento
 
 ---
 
 ## Observações (Extras ou Dificuldades)
 
-- [Validação dos campos, uso de abstracao e associação além de separar as logicas para salvar os dados em arquivo]
+- [Validação dos campos, uso de abstracao e associação e enums além de separar as logicas para salvar os dados em arquivo. Tive dificuldade principalmente na implementação do salvamento de arquivos]
 
 ---
 
