@@ -24,7 +24,32 @@ O enunciado do trabalho pode ser encontrado aqui:
 2. **Execução:**  
    [Executar classe Main.java na raiz]
 
-3. **Estrutura de Pastas:**  
+3. **Estrutura de Pastas:**
+ ```
+   src/
+   ├── entities/
+   │ ├── Aluno.java
+   │ ├── Disciplina.java
+   │ ├── Matriculado.java
+   │ ├── Pessoa.java
+   │ ├── Professor.java
+   │ └── Turma.java
+   │
+   ├── enums/
+   │ ├── Modalidade.java
+   │ └── Sexo.java
+   │
+   ├── persistence/
+   │ ├── AlunoDAO.java
+   │ ├── DisciplinaDAO.java
+   │ ├── FileManager.java
+   │ ├── MatriculaDAO.java
+   │ ├── ProfessorDAO.java
+   │ └── TurmaDAO.java
+   │
+   ├── Main.java
+   └── Validador.java]
+```
 
 3. **Versão do JAVA utilizada:**  
    [Java 21]
